@@ -54,13 +54,18 @@ extension CGPoint {
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let humanPlayer = SKSpriteNode(imageNamed: "roundplayer20")
-    let computerPlayer = SKSpriteNode(imageNamed: "roundplayer20")
+    let computerPlayerOne = SKSpriteNode(imageNamed: "roundplayer20")
+    let computerPlayerTwo = SKSpriteNode(imageNamed: "roundplayer20")
+    let computerPlayerThree = SKSpriteNode(imageNamed: "roundplayer20")
+    
     var leftButton: SKSpriteNode! = nil
     var rightButton: SKSpriteNode! = nil
     var upButton: SKSpriteNode! = nil
     var downButton: SKSpriteNode! = nil
     var shotCounter: Int = 0
     var shotCountLabel: SKLabelNode! = nil
+    
+    let paintballSpeed: NSTimeInterval = 2 // 1 very fast 4 very slow
     
     func setUpButtons() {
         leftButton = SKSpriteNode(imageNamed: "leftarrow64")
@@ -155,44 +160,95 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         humanPlayer.physicsBody?.collisionBitMask = PhysicsCategory.Bunker
         
         
-        setUpOpponent()
+        setUpOpponents()
         
         
         
     }
     
-    func setUpOpponent() {
-        computerPlayer.position = CGPoint(x: size.width * 0.5, y: size.height * 0.8)
-        addChild(computerPlayer)
+    func setUpOpponents() {
         
-        computerPlayer.physicsBody = SKPhysicsBody(circleOfRadius: computerPlayer.size.width / 2)
-        computerPlayer.physicsBody?.dynamic = true
-        computerPlayer.physicsBody?.categoryBitMask = PhysicsCategory.Player
-        computerPlayer.physicsBody?.contactTestBitMask = PhysicsCategory.Paintball
+     
+        let arrayOfComputerPlayers = [computerPlayerOne, computerPlayerTwo, computerPlayerThree]
+        let arrayOfWidth : [CGFloat]  = [0.1, 0.5, 0.9]
+        let arrayOfFirstPositionMovement : [CGFloat] = [45, 45, -45]
         
+        var i = 0
+            
+        while i < 3 {
+            
+            print("i \(i)")
+            
+            let computerPlayerToPlaceOnScreen: SKSpriteNode = arrayOfComputerPlayers[i]
         
+            computerPlayerToPlaceOnScreen.position = CGPoint(x: size.width * arrayOfWidth[i], y: size.height * 0.96)
+            addChild(computerPlayerToPlaceOnScreen)
+            
+            computerPlayerToPlaceOnScreen.physicsBody = SKPhysicsBody(circleOfRadius: computerPlayerToPlaceOnScreen.size.width / 2)
+            computerPlayerToPlaceOnScreen.physicsBody?.dynamic = true
+            computerPlayerToPlaceOnScreen.physicsBody?.categoryBitMask = PhysicsCategory.Player
+            computerPlayerToPlaceOnScreen.physicsBody?.contactTestBitMask = PhysicsCategory.Paintball
+            
+            let positionMovement: CGFloat = arrayOfFirstPositionMovement[i]
+            let negativeOne: CGFloat = -1
+            
+            let firstPositionMovement = SKAction.moveToX(computerPlayerToPlaceOnScreen.position.x + positionMovement, duration: 0.7)
+    //        let movePlayerLeft = SKAction.moveToX(computerPlayerToPlaceOnScreen.position.x - 150, duration: 2)
+            let secondPositionMovement = SKAction.moveByX(positionMovement * negativeOne, y: 0, duration: 0.7)
+            
+            let fireShot = SKAction.performSelector("shootPaintballForComputer", onTarget: self)
+            
+            let sequence = SKAction.sequence([firstPositionMovement, fireShot, secondPositionMovement])
+            
+            let sequenceRepeating = SKAction.repeatActionForever(sequence)
+            
+            computerPlayerToPlaceOnScreen.runAction(sequenceRepeating)
+            
+//            let shotTime = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "shootPaintballForComputer", userInfo: nil, repeats: true)
+            
+            
+    //        shotTime.fire()
+            
+            i++
         
-        let movePlayerRight = SKAction.moveToX(computerPlayer.position.x + 150, duration: 2)
-//        let movePlayerLeft = SKAction.moveToX(computerPlayer.position.x - 150, duration: 2)
-        let movePlayerLeft = SKAction.moveByX(-150, y: 0, duration: 2)
-        
-        let sequence = SKAction.sequence([movePlayerRight, movePlayerLeft])
-        
-        let sequenceRepeating = SKAction.repeatActionForever(sequence)
-        
-        computerPlayer.runAction(sequenceRepeating)
-        
-        let shotTime = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "shootPaintballForComputer", userInfo: nil, repeats: true)
-        
-        
-        shotTime.fire()
+        }
         
         
         
     }
     
     func shootPaintballForComputer() {
-        shootPaintballFromStartPositionTowards(computerPlayer.position, towardsPosition: humanPlayer.position)
+        
+        
+        
+        print("computer position is \(computerPlayerOne.position)")
+//
+//        print("node.parent is \(computerPlayerOne.parent)")
+        var i = 0
+        let arrayOfComputerPlayers = [computerPlayerOne, computerPlayerTwo, computerPlayerThree]
+        
+        while i < 3 {
+            
+            
+            let computerPlayer: SKSpriteNode = arrayOfComputerPlayers[i]
+
+            
+            if computerPlayer.parent != nil {
+                
+                let humanPositionToTheRight = CGPoint(x: humanPlayer.position.x + 27, y: humanPlayer.position.y)
+                let humanPositionToTheLeft = CGPoint(x: humanPlayer.position.x - 27, y: humanPlayer.position.y)
+
+                
+                shootPaintballFromStartPositionTowards(computerPlayer.position, towardsPosition: humanPositionToTheLeft)
+                shootPaintballFromStartPositionTowards(computerPlayer.position, towardsPosition: humanPositionToTheRight)
+                shootPaintballFromStartPositionTowards(computerPlayer.position, towardsPosition: humanPlayer.position)
+
+                
+            }
+            
+            i++
+        
+        }
     }
     
     
@@ -265,19 +321,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let offset = towardsPosition - startPosition
 
         let direction = offset.normalized()
-        print("direction \(direction)")
+//        print("direction \(direction)")
         
         var largerNumber: CGFloat
         
         if fabs(direction.x) > fabs(direction.y) {
             largerNumber = direction.x
+//            print("x is larger number")
         }
         
         else {
             largerNumber = direction.y
+//            print("y is larger number")
+
         }
         
-        let multiplier = (((humanPlayer.size.width / 2) + (paintball.size.width / 2)) / largerNumber)
+        let multiplier = (((humanPlayer.size.width / 2) + (paintball.size.width / 2)) / fabs(largerNumber))
+        
+        let xStartPosition = startPosition.x + (direction.x * multiplier * 1.1)
+        
+        let yStartPosition = startPosition.y + (direction.y * multiplier * 1.1)
+        
+//        print("player x position: \(startPosition.x) player y position: \(startPosition.y)")
+
+        
+//        print("x start position: \(xStartPosition) y start position: \(yStartPosition)")
+        
         
         paintball.position = CGPoint(x: startPosition.x + (direction.x * multiplier * 1.1), y: startPosition.y + (direction.y * multiplier * 1.1))
         
@@ -295,7 +364,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         paintball.physicsBody?.dynamic = true
         paintball.physicsBody?.categoryBitMask = PhysicsCategory.Paintball
-        paintball.physicsBody?.contactTestBitMask = PhysicsCategory.Bunker
+        paintball.physicsBody?.contactTestBitMask = PhysicsCategory.Bunker | PhysicsCategory.Player
         paintball.physicsBody?.collisionBitMask = PhysicsCategory.None
         paintball.physicsBody?.usesPreciseCollisionDetection = true
         
@@ -312,15 +381,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // 7 - Make it shoot far enough to be guaranteed off screen
         let shootAmount = direction * 1000
-        print("shoot amount \(shootAmount)")
+//        print("shoot amount \(shootAmount)")
         
         // 8 - Add the shoot amount to the current position
         let realDest = shootAmount + paintball.position
-        print("real dest \(realDest)")
+//        print("real dest \(realDest)")
         
         
         // 9 - Create the actions
-        let actionMove = SKAction.moveTo(realDest, duration: 2.0)
+        let actionMove = SKAction.moveTo(realDest, duration: paintballSpeed)
         let actionMoveDone = SKAction.removeFromParent()
         paintball.runAction(SKAction.sequence([actionMove, actionMoveDone]))
         
@@ -338,7 +407,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let touchLocation = touch.locationInNode(self)
         
         
-        humanPlayer.removeAllActions()
 
         
         
@@ -348,11 +416,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         print("touch location: \(touchLocation)")
         
-        shootPaintballFromStartPositionTowards(humanPlayer.position, towardsPosition: touchLocation)
-        shotCounter++
-        shotCountLabel.text = "\(shotCounter)"
-        
+            if humanPlayer.parent != nil {
             
+                shootPaintballFromStartPositionTowards(humanPlayer.position, towardsPosition: touchLocation)
+                shotCounter++
+                shotCountLabel.text = "\(shotCounter)"
+            }
+            
+        }
+        
+        else {
+                humanPlayer.removeAllActions()
+
         }
     }
     
