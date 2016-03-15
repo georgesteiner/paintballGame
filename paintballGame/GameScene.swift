@@ -65,7 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var shotCounter: Int = 0
     var shotCountLabel: SKLabelNode! = nil
     
-    let paintballSpeed: NSTimeInterval = 2 // 1 very fast 4 very slow
+    var paintballSpeed: NSTimeInterval = 2 // 1 very fast 4 very slow
     
     func setUpButtons() {
         leftButton = SKSpriteNode(imageNamed: "leftarrow64")
@@ -162,6 +162,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         setUpOpponents()
         
+        
+        
+        
+        let prefs = NSUserDefaults.standardUserDefaults()
+        let paintballSpeedFromStorage = prefs.floatForKey("paintballSpeed")
+        paintballSpeed = Double(paintballSpeedFromStorage)
         
         
     }

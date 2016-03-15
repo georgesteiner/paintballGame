@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RNN-1E-wJm">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Game View Controller-->
@@ -21,6 +22,74 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="Ayj-3p-gjQ">
+            <objects>
+                <viewController id="RNN-1E-wJm" customClass="HomeViewController" customModule="paintballGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ynx-ub-QnV"/>
+                        <viewControllerLayoutGuide type="bottom" id="ROf-Xn-WgO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YRL-Yp-7ie">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0u8-5I-6PS">
+                                <rect key="frame" x="261" y="477" width="78" height="30"/>
+                                <state key="normal" title="Start Game"/>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="ExD-2J-gpg"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="seY-NY-e0W">
+                                <rect key="frame" x="32" y="105" width="536" height="31"/>
+                                <connections>
+                                    <action selector="paintballSpeedliderValueChanged:" destination="RNN-1E-wJm" eventType="valueChanged" id="MB8-Cf-fYx"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paintball Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWp-hQ-tfT">
+                                <rect key="frame" x="241" y="62" width="119" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cl5-eg-GEe">
+                                <rect key="frame" x="387" y="62" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqG-M1-vi6">
+                                <rect key="frame" x="250" y="171" width="101" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="seY-NY-e0W" firstAttribute="leading" secondItem="YRL-Yp-7ie" secondAttribute="leadingMargin" constant="14" id="38Z-zy-yL8"/>
+                            <constraint firstItem="0u8-5I-6PS" firstAttribute="centerX" secondItem="YRL-Yp-7ie" secondAttribute="centerX" id="864-jU-xWP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="seY-NY-e0W" secondAttribute="trailing" constant="14" id="CA2-su-Q6L"/>
+                            <constraint firstItem="MqG-M1-vi6" firstAttribute="top" secondItem="seY-NY-e0W" secondAttribute="bottom" constant="36" id="DTf-Kd-Kf2"/>
+                            <constraint firstItem="seY-NY-e0W" firstAttribute="top" secondItem="Ynx-ub-QnV" secondAttribute="bottom" constant="85" id="Pyh-lF-3lG"/>
+                            <constraint firstItem="Cl5-eg-GEe" firstAttribute="leading" secondItem="fWp-hQ-tfT" secondAttribute="trailing" constant="27" id="URG-zJ-SEG"/>
+                            <constraint firstItem="seY-NY-e0W" firstAttribute="centerX" secondItem="fWp-hQ-tfT" secondAttribute="centerX" id="V4g-G0-EZl"/>
+                            <constraint firstItem="ROf-Xn-WgO" firstAttribute="top" secondItem="0u8-5I-6PS" secondAttribute="bottom" constant="93" id="Zdp-Jo-leW"/>
+                            <constraint firstItem="seY-NY-e0W" firstAttribute="top" secondItem="fWp-hQ-tfT" secondAttribute="bottom" constant="22" id="dBc-22-izy"/>
+                            <constraint firstItem="MqG-M1-vi6" firstAttribute="centerX" secondItem="YRL-Yp-7ie" secondAttribute="centerX" id="etg-zF-7FW"/>
+                            <constraint firstItem="Cl5-eg-GEe" firstAttribute="centerY" secondItem="fWp-hQ-tfT" secondAttribute="centerY" id="fGt-Vj-nsd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="paintballSpeedLabel" destination="Cl5-eg-GEe" id="kd9-Nw-0kS"/>
+                        <outlet property="paintballSpeedSlider" destination="seY-NY-e0W" id="6Qj-mM-9v2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1hP-IJ-BI8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-163" y="377"/>
         </scene>
     </scenes>
 </document>

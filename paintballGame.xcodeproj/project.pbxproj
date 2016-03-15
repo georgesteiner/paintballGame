@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		605C66ED1C98863E0078738B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C66EC1C98863E0078738B /* HomeViewController.swift */; };
 		609BD95D1C94AC260046C1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609BD95C1C94AC260046C1DF /* AppDelegate.swift */; };
 		609BD9611C94AC260046C1DF /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609BD9601C94AC260046C1DF /* GameScene.swift */; };
 		609BD9631C94AC260046C1DF /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609BD9621C94AC260046C1DF /* GameViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		605C66EC1C98863E0078738B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		609BD9591C94AC260046C1DF /* paintballGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = paintballGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609BD95C1C94AC260046C1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		609BD9601C94AC260046C1DF /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				609BD9671C94AC260046C1DF /* Assets.xcassets */,
 				609BD9691C94AC260046C1DF /* LaunchScreen.storyboard */,
 				609BD96C1C94AC260046C1DF /* Info.plist */,
+				605C66EC1C98863E0078738B /* HomeViewController.swift */,
 			);
 			path = paintballGame;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 				609BD9611C94AC260046C1DF /* GameScene.swift in Sources */,
 				609BD9631C94AC260046C1DF /* GameViewController.swift in Sources */,
 				609BD95D1C94AC260046C1DF /* AppDelegate.swift in Sources */,
+				605C66ED1C98863E0078738B /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +294,7 @@
 				609BD9711C94AC260046C1DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
