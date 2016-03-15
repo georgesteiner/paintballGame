@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		609BD95D1C94AC260046C1DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609BD95C1C94AC260046C1DF /* AppDelegate.swift */; };
-		609BD95F1C94AC260046C1DF /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 609BD95E1C94AC260046C1DF /* GameScene.sks */; };
 		609BD9611C94AC260046C1DF /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609BD9601C94AC260046C1DF /* GameScene.swift */; };
 		609BD9631C94AC260046C1DF /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609BD9621C94AC260046C1DF /* GameViewController.swift */; };
 		609BD9661C94AC260046C1DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 609BD9641C94AC260046C1DF /* Main.storyboard */; };
@@ -19,7 +18,6 @@
 /* Begin PBXFileReference section */
 		609BD9591C94AC260046C1DF /* paintballGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = paintballGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609BD95C1C94AC260046C1DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		609BD95E1C94AC260046C1DF /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		609BD9601C94AC260046C1DF /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		609BD9621C94AC260046C1DF /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		609BD9651C94AC260046C1DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 			isa = PBXGroup;
 			children = (
 				609BD95C1C94AC260046C1DF /* AppDelegate.swift */,
-				609BD95E1C94AC260046C1DF /* GameScene.sks */,
 				609BD9601C94AC260046C1DF /* GameScene.swift */,
 				609BD9621C94AC260046C1DF /* GameViewController.swift */,
 				609BD9641C94AC260046C1DF /* Main.storyboard */,
@@ -128,7 +125,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				609BD95F1C94AC260046C1DF /* GameScene.sks in Resources */,
 				609BD96B1C94AC260046C1DF /* LaunchScreen.storyboard in Resources */,
 				609BD9681C94AC260046C1DF /* Assets.xcassets in Resources */,
 				609BD9661C94AC260046C1DF /* Main.storyboard in Resources */,
@@ -259,6 +255,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GeorgeSteiner.paintballGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -270,6 +267,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GeorgeSteiner.paintballGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
