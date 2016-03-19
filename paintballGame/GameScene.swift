@@ -89,9 +89,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(downButton)
         
         
-        shotCountLabel = SKLabelNode(text: "\(shotCounter)")
-        shotCountLabel.position = CGPoint(x: size.width * 0.85, y: size.height * 0.03)
-        self.addChild(shotCountLabel)
+//        shotCountLabel = SKLabelNode(text: "\(shotCounter)")
+//        shotCountLabel.position = CGPoint(x: size.width * 0.85, y: size.height * 0.03)
+//        self.addChild(shotCountLabel)
         
     }
 
@@ -188,7 +188,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         humanPlayer.physicsBody?.collisionBitMask = PhysicsCategory.Bunker
         
         
-//        setUpOpponents()
+        setUpOpponents()
         
         
         
@@ -196,6 +196,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let prefs = NSUserDefaults.standardUserDefaults()
         let paintballSpeedFromStorage = prefs.floatForKey("paintballSpeed")
         paintballSpeed = Double(paintballSpeedFromStorage)
+        
+        
+        shotCountLabel = SKLabelNode(text: "\(shotCounter)")
+        shotCountLabel.position = CGPoint(x: size.width * 0.85, y: size.height * 0.03)
+        self.addChild(shotCountLabel)
         
         
     }
@@ -288,6 +293,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
+        print("touches began")
         
         
         
@@ -298,40 +304,40 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let touchLocation = touch.locationInNode(self)
         
         
-        
-        
-        
-        
-        if leftButton.containsPoint(touchLocation) {
-//            print("move left")
-            
-            let movePlayerLeft = SKAction.moveToX(humanPlayer.position.x - 450, duration: 6)
-            humanPlayer.runAction(movePlayerLeft)
-        }
-        
-        else if rightButton.containsPoint(touchLocation) {
-//            print("move right")
-            
-            let movePlayerRight = SKAction.moveToX(humanPlayer.position.x + 450, duration: 6)
-            humanPlayer.runAction(movePlayerRight)
-        }
-        
-        else if upButton.containsPoint(touchLocation) {
-//            print("move up")
-            
-            let movePlayerUp = SKAction.moveToY(humanPlayer.position.y + 900, duration: 12)
-            humanPlayer.runAction(movePlayerUp)
-        }
-        
-        else if downButton.containsPoint(touchLocation) {
-//            print("move down")
-            
-            let movePlayerDown = SKAction.moveToY(humanPlayer.position.y - 900, duration: 12)
-            humanPlayer.runAction(movePlayerDown)
-        }
-        
-        
-        
+//        
+//        
+//        
+//        
+//        if leftButton.containsPoint(touchLocation) {
+////            print("move left")
+//            
+//            let movePlayerLeft = SKAction.moveToX(humanPlayer.position.x - 450, duration: 6)
+//            humanPlayer.runAction(movePlayerLeft)
+//        }
+//        
+//        else if rightButton.containsPoint(touchLocation) {
+////            print("move right")
+//            
+//            let movePlayerRight = SKAction.moveToX(humanPlayer.position.x + 450, duration: 6)
+//            humanPlayer.runAction(movePlayerRight)
+//        }
+//        
+//        else if upButton.containsPoint(touchLocation) {
+////            print("move up")
+//            
+//            let movePlayerUp = SKAction.moveToY(humanPlayer.position.y + 900, duration: 12)
+//            humanPlayer.runAction(movePlayerUp)
+//        }
+//        
+//        else if downButton.containsPoint(touchLocation) {
+////            print("move down")
+//            
+//            let movePlayerDown = SKAction.moveToY(humanPlayer.position.y - 900, duration: 12)
+//            humanPlayer.runAction(movePlayerDown)
+//        }
+//        
+//        
+//        
 
     }
     
@@ -433,7 +439,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
+        print("touches ended")
+
         // 1 - Choose one of the touches to work with
         guard let touch = touches.first else {
             return
@@ -442,27 +449,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
 
-        
-        
-        
-        if !leftButton.containsPoint(touchLocation) && !rightButton.containsPoint(touchLocation) && !upButton.containsPoint(touchLocation) && !downButton.containsPoint(touchLocation){
+        if humanPlayer.parent != nil {
             
+            shootPaintballFromStartPositionTowards(humanPlayer.position, towardsPosition: touchLocation)
+            print("test 1")
 
-//        print("touch location: \(touchLocation)")
-        
-            if humanPlayer.parent != nil {
+            shotCounter++
+            shotCountLabel.text = "\(shotCounter)"
             
-                shootPaintballFromStartPositionTowards(humanPlayer.position, towardsPosition: touchLocation)
-                shotCounter++
-                shotCountLabel.text = "\(shotCounter)"
-            }
-            
-        }
-        
-        else {
-                humanPlayer.removeAllActions()
+            print("test 2")
 
         }
+
+        
+        
+//        if !leftButton.containsPoint(touchLocation) && !rightButton.containsPoint(touchLocation) && !upButton.containsPoint(touchLocation) && !downButton.containsPoint(touchLocation){
+//            
+//
+////        print("touch location: \(touchLocation)")
+//        
+//            if humanPlayer.parent != nil {
+//            
+//                shootPaintballFromStartPositionTowards(humanPlayer.position, towardsPosition: touchLocation)
+//                shotCounter++
+//                shotCountLabel.text = "\(shotCounter)"
+//            }
+//            
+//        }
+//        
+//        else {
+//                humanPlayer.removeAllActions()
+//
+//        }
     }
     
     func paintballDidCollideWithBunker(paintball:SKSpriteNode, bunker:SKSpriteNode) {
