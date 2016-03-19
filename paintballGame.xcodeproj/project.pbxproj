@@ -14,6 +14,7 @@
 		609BD9661C94AC260046C1DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 609BD9641C94AC260046C1DF /* Main.storyboard */; };
 		609BD9681C94AC260046C1DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609BD9671C94AC260046C1DF /* Assets.xcassets */; };
 		609BD96B1C94AC260046C1DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 609BD9691C94AC260046C1DF /* LaunchScreen.storyboard */; };
+		60A66BAF1C9DE80D00A3FD8D /* AnalogJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A66BAE1C9DE80D00A3FD8D /* AnalogJoystick.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		609BD9671C94AC260046C1DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		609BD96A1C94AC260046C1DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		609BD96C1C94AC260046C1DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60A66BAE1C9DE80D00A3FD8D /* AnalogJoystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalogJoystick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				609BD9691C94AC260046C1DF /* LaunchScreen.storyboard */,
 				609BD96C1C94AC260046C1DF /* Info.plist */,
 				605C66EC1C98863E0078738B /* HomeViewController.swift */,
+				60A66BAE1C9DE80D00A3FD8D /* AnalogJoystick.swift */,
 			);
 			path = paintballGame;
 			sourceTree = "<group>";
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				609BD9611C94AC260046C1DF /* GameScene.swift in Sources */,
+				60A66BAF1C9DE80D00A3FD8D /* AnalogJoystick.swift in Sources */,
 				609BD9631C94AC260046C1DF /* GameViewController.swift in Sources */,
 				609BD95D1C94AC260046C1DF /* AppDelegate.swift in Sources */,
 				605C66ED1C98863E0078738B /* HomeViewController.swift in Sources */,

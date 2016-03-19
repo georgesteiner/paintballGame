@@ -108,12 +108,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let arrayOfHeight : [CGFloat] = [0.2, 0.45, 0.65, 0.9]
         
         while rows < 4 {
-            print("rows \(rows)")
+//            print("rows \(rows)")
 
             var i = 0
 
             while i < 3 {
-                print("i \(i)")
+//                print("i \(i)")
                 
               
                 
@@ -139,9 +139,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    let joystick = AnalogJoystick(diameter: 100)
+    
     
     
     override func didMoveToView(view: SKView) {
+        
+        addChild(joystick)
+        joystick.position = CGPoint(x: 50, y: 50)
+        joystick.substrate.color = UIColor.grayColor()
+        joystick.trackingHandler = { jData in
+            
+            print("jdata.angular is \(jData.angular) jdata.velocity is \(jData.velocity)")
+            // something...
+            // jData contains angular && velocity (jData.angular, jData.velocity)
+            
+//            self.humanPlayer.position.x += 1
+            
+            
+            
+//            self.humanPlayer.position.x += jData.angular
+//            self.humanPlayer.position = jData.velocity
+            
+            let xMovement = jData.velocity.x
+            let yMovement = jData.velocity.y
+            
+            // 1 = 49.975
+            
+            self.humanPlayer.position.x += xMovement / 20
+            self.humanPlayer.position.y += yMovement / 20
+            
+        }
 
         backgroundColor = SKColor(hue: 0.33, saturation: 1, brightness: 0.54, alpha: 1)
 
@@ -149,7 +177,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(humanPlayer)
         
         setUpBunkers()
-        setUpButtons()
+//        setUpButtons()
         
         physicsWorld.gravity = CGVectorMake(0, 0)
         physicsWorld.contactDelegate = self
@@ -160,7 +188,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         humanPlayer.physicsBody?.collisionBitMask = PhysicsCategory.Bunker
         
         
-        setUpOpponents()
+//        setUpOpponents()
         
         
         
@@ -183,7 +211,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         while i < 3 {
             
-            print("i \(i)")
+//            print("i \(i)")
             
             let computerPlayerToPlaceOnScreen: SKSpriteNode = arrayOfComputerPlayers[i]
         
@@ -227,7 +255,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         
-        print("computer position is \(computerPlayerOne.position)")
+//        print("computer position is \(computerPlayerOne.position)")
 //
 //        print("node.parent is \(computerPlayerOne.parent)")
         var i = 0
@@ -275,28 +303,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         if leftButton.containsPoint(touchLocation) {
-            print("move left")
+//            print("move left")
             
             let movePlayerLeft = SKAction.moveToX(humanPlayer.position.x - 450, duration: 6)
             humanPlayer.runAction(movePlayerLeft)
         }
         
         else if rightButton.containsPoint(touchLocation) {
-            print("move right")
+//            print("move right")
             
             let movePlayerRight = SKAction.moveToX(humanPlayer.position.x + 450, duration: 6)
             humanPlayer.runAction(movePlayerRight)
         }
         
         else if upButton.containsPoint(touchLocation) {
-            print("move up")
+//            print("move up")
             
             let movePlayerUp = SKAction.moveToY(humanPlayer.position.y + 900, duration: 12)
             humanPlayer.runAction(movePlayerUp)
         }
         
         else if downButton.containsPoint(touchLocation) {
-            print("move down")
+//            print("move down")
             
             let movePlayerDown = SKAction.moveToY(humanPlayer.position.y - 900, duration: 12)
             humanPlayer.runAction(movePlayerDown)
@@ -420,7 +448,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !leftButton.containsPoint(touchLocation) && !rightButton.containsPoint(touchLocation) && !upButton.containsPoint(touchLocation) && !downButton.containsPoint(touchLocation){
             
 
-        print("touch location: \(touchLocation)")
+//        print("touch location: \(touchLocation)")
         
             if humanPlayer.parent != nil {
             
@@ -438,14 +466,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func paintballDidCollideWithBunker(paintball:SKSpriteNode, bunker:SKSpriteNode) {
-        print("Hit")
+//        print("Hit")
         bunker.removeFromParent()
         
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
         
-        print("did begin contact called")
+//        print("did begin contact called")
         
         contact.bodyA
 
@@ -454,7 +482,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var bunker: SKPhysicsBody
         var paintball: SKPhysicsBody
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
-            print("bunker is body B")
+//            print("bunker is body B")
             
             paintball = contact.bodyA
             bunker = contact.bodyB
@@ -465,7 +493,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         } else {
             
-            print("bunker is body A")
+//            print("bunker is body A")
 
             paintball = contact.bodyB
             bunker = contact.bodyA
