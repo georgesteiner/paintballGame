@@ -236,13 +236,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let positionMovement: CGFloat = arrayOfFirstPositionMovement[i]
             let negativeOne: CGFloat = -1
             
+            let random = NSTimeInterval(arc4random_uniform(3))
+            
+            
             let firstPositionMovement = SKAction.moveToX(computerPlayerToPlaceOnScreen.position.x + positionMovement, duration: 0.7)
     //        let movePlayerLeft = SKAction.moveToX(computerPlayerToPlaceOnScreen.position.x - 150, duration: 2)
+            
+            let positionPause = SKAction.moveTo(computerPlayerToPlaceOnScreen.position, duration: random)
+            
             let secondPositionMovement = SKAction.moveByX(positionMovement * negativeOne, y: 0, duration: 0.7)
             
             let fireShot = SKAction.performSelector("shootPaintballForComputer", onTarget: self)
             
-            let sequence = SKAction.sequence([firstPositionMovement, fireShot, secondPositionMovement])
+            let sequence = SKAction.sequence([firstPositionMovement, fireShot, secondPositionMovement, positionPause])
             
             let sequenceRepeating = SKAction.repeatActionForever(sequence)
             
