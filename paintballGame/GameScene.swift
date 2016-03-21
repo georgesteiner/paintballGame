@@ -163,11 +163,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             let xMovement = jData.velocity.x
             let yMovement = jData.velocity.y
-            
+            let minimumMovement: CGFloat = 10
             // 1 = 49.975
             
-            self.humanPlayer.position.x += xMovement / 20
+            if fabs(xMovement) > minimumMovement{
+                self.humanPlayer.position.x += xMovement / 20
+            }
+            
+            if fabs(yMovement) > minimumMovement {
             self.humanPlayer.position.y += yMovement / 20
+            }
             
         }
 
@@ -460,7 +465,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("test 2")
 
         }
+        
+        
 
+        if shotCountLabel.containsPoint(touchLocation) {
+            
+            print("new game tapped")
+            
+            self.removeAllChildren()
+            let viewSize = self.view?.bounds.size
+            let newGame = GameScene(size: viewSize!)
+            self.view?.presentScene(newGame)
+        }
         
         
 //        if !leftButton.containsPoint(touchLocation) && !rightButton.containsPoint(touchLocation) && !upButton.containsPoint(touchLocation) && !downButton.containsPoint(touchLocation){
